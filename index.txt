@@ -1,1 +1,64 @@
-mjh
+git 笔记
+简介
+	git 分布式版本控制系统
+	svn 集中式版本控制系统		
+安装
+	1) windows 下安装
+		下载 msysgit(网盘中有)
+		配置个人信息
+			$ git config --global user.name "Your Name"
+			$ git config --global user.email "email@example.com"
+常用操作
+	1) 创建版本库
+		$ mkdir test	(创建文件夹)
+		$ cd test		(进入...)
+		$ git init		(把当前目录变为 git 管理的仓库)
+
+		在当前目录下创建好一个文件 readme.txt
+
+		$ git add readme.txt	(把文件添加到仓库(暂存区))
+		(没有任何显示? Unix: 没有消息就是好消息)
+		$ git commit -m "wrote a readme file"	(把文件添加到仓库(正式区))
+
+		文件所在的目录为 工作区
+		文件通过 git add index.txt	添加到仓库的暂存区
+		git commit -m "add index"	将仓库暂存区中的数据存储到正式区
+
+	2) 版本库相关操作
+		$ git status	(查看仓库当前状态)
+		$ git diff	(查看最近一次修改的内容)
+		$ git log	(查看版本记录)
+		$ git log --pretty=oneline	(只查看 git 版本号和注释)
+		$ git reflog	(查看每次操作的记录)
+		回溯到过去的版本
+			(git 中 HEAD 表示当前版本)
+			$ git reset --hard HEAD^	(回溯到上一个版本)
+			$ git reset --hard HEAD^^	(回溯到上上一个版本)
+			...
+			$ git reset --hard HEAD~100	(回溯到上 100 个版本)
+		回溯版本(过去和未来)
+			$ git reset --hard (版本 id)
+		$ git rm test.txt	(从版本库中删除文件)
+		$ git checkout -- test.txt	(误删, 从版本库中恢复)
+
+	3) 远程仓库
+		本地 git 和 github 仓库通过 SSH 加密传输(第一次推送时, 出错)
+		创建 SSH Key
+			$ ssh-keygen -t rsa -C "youremail@example.com"
+		.ssh 目录下
+			id_rsa 私钥
+			id_rsa.pub 公钥
+		在 github 中 添加 公钥
+
+		$ git remote add origin git@github.com:miaojinhui/test.git 	(本地需要关联的仓库内部中执行)
+		$ git push -u origin master		(将本地仓库中的内容推送到 github 中指定的仓库, 第一推送)
+
+		$ git push origin master	(以后这样推送)
+
+		从远程库克隆
+			$git clone git@github.com:miaojinhui/test1.git
+
+更多详细内容查看	https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
+
+
+
